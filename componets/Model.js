@@ -1,11 +1,15 @@
-import React, {Component} from 'react';
-import {Button, ScrollView, Text, View, StyleSheet} from 'react-native';
+import React from 'react';
+import {
+  Button,
+  ScrollView,
+  Text,
+  View,
+  StyleSheet,
+  TouchableHighlight,
+} from 'react-native';
 import Modal from 'react-native-modal';
 import ModalBaseScene from '../utils/ModalBaseScene';
-
-type State = {
-  scrollOffset: null | number,
-};
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 function TimeLine(props) {
   let s = {};
@@ -53,7 +57,7 @@ export default class Agenda extends ModalBaseScene {
       {time: '8:30 - 9:30 : Good morning'},
     ];
     for (let i = 0; i < this.data.length; i++) {
-      this.times.push(<TimeLine style={i+1} data={this.data[i]} />);
+      this.times.push(<TimeLine style={i + 1} data={this.data[i]} />);
     }
   }
 
@@ -73,7 +77,18 @@ export default class Agenda extends ModalBaseScene {
   render() {
     return (
       <View style={{flex: 1}}>
-        <Button title="Show modal" onPress={this.toggleModal} />
+        <TouchableHighlight
+          onPress={() => {
+            this.toggleModal();
+          }}>
+          <View>
+            <Text style={styles.sectionTitle}>Agenda</Text>
+            <Text style={styles.sectionDescription}>
+              Click here to see the agenda of the event
+            </Text>
+          </View>
+        </TouchableHighlight>
+        {/*<Button title="Show modal" onPress={this.toggleModal} />*/}
         <Modal
           isVisible={this.state.isModalVisible}
           testID={'modal'}
@@ -90,16 +105,6 @@ export default class Agenda extends ModalBaseScene {
               centerContent={true}
               onScroll={this.handleOnScroll}
               scrollEventThrottle={16}>
-              {/*<View style={styles.scrollableModalContent1}>*/}
-              {/*  <Text style={styles.scrollableModalText1}>*/}
-              {/*    8:30 - 9:30 : Good morning*/}
-              {/*  </Text>*/}
-              {/*</View>*/}
-              {/*<View style={styles.scrollableModalContent2}>*/}
-              {/*  <Text style={styles.scrollableModalText1}>*/}
-              {/*    8:30 - 9:30 : Good morning*/}
-              {/*  </Text>*/}
-              {/*</View>*/}
               {this.times}
             </ScrollView>
           </View>
@@ -136,5 +141,16 @@ const styles = StyleSheet.create({
   scrollableModalText2: {
     fontSize: 20,
     color: 'white',
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: Colors.black,
+  },
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+    color: Colors.dark,
   },
 });

@@ -49,12 +49,6 @@ export default class App extends Component {
             <Slider />
             <View style={styles.body}>
               <View style={styles.sectionContainer}>
-                <MyCard />
-              </View>
-              <View style={styles.sectionContainer} />
-            </View>
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
                 <Agenda />
               </View>
               <View style={styles.sectionContainer} />
